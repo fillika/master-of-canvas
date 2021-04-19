@@ -9,8 +9,8 @@ function initCanvas() {
   if (canvas) {
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
     const dpi = 2;
-    canvas.width = 640 * dpi;
-    canvas.height = 360 * dpi;
+    canvas.width = 350 * dpi;
+    canvas.height = 197 * dpi;
 
     createImage(imgValheim, canvas, ctx);
   }

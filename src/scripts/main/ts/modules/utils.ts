@@ -4,16 +4,12 @@ function createImage(src: string, canvas: HTMLCanvasElement, ctx: CanvasRenderin
   const image1 = new Image();
   image1.src = src;
 
-  const particlesArray = createParticlesArray(canvas, ctx, 5000);
-
   image1.addEventListener('load', () => {
     ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
     const mappedImage = createMappedImage(canvas, ctx);
+    const particlesArray = createParticlesArray(canvas, ctx, 7000, mappedImage);
 
-    console.log(mappedImage);
-
-    // -----
-
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     animate(canvas, ctx, particlesArray, image1);
   });
 }
@@ -24,15 +20,16 @@ function animate(
   particlesArray: Particle[],
   image: HTMLImageElement
 ) {
-  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-
   ctx.globalAlpha = 0.05;
   ctx.fillStyle = 'rgb(0,0,0)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.globalAlpha = 0.25;
 
   for (let k = 0; k < particlesArray.length; k++) {
     const element = particlesArray[k];
     element.update();
+    ctx.globalAlpha = particlesArray[k].speed;
+
     element.draw();
   }
 
@@ -42,13 +39,14 @@ function animate(
 function createParticlesArray(
   canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D,
-  numberOfParticles: number
+  numberOfParticles: number,
+  mappedImage: (number | string)[][][]
 ): Particle[] {
   const particlesArray = [];
 
   // Создаем частицы
   for (let k = 0; k < numberOfParticles; k++) {
-    particlesArray.push(new Particle(canvas, ctx));
+    particlesArray.push(new Particle(canvas, ctx, mappedImage));
   }
   return particlesArray;
 }
@@ -57,7 +55,7 @@ function calcRelativeBrightness(r: number, g: number, b: number) {
   return Math.sqrt(r * r * 0.299 + g * g * 0.587 + b * b * 0.114) / 100;
 }
 
-function createMappedImage(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D): number[][][] {
+function createMappedImage(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D): (number | string)[][][] {
   // Получем пиксели
   const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const mappedImage = [];
@@ -75,7 +73,7 @@ function createMappedImage(canvas: HTMLCanvasElement, ctx: CanvasRenderingContex
       const blue = pixels.data[y * 4 * pixels.width + x * 4 + 2];
       const brightness = calcRelativeBrightness(red, green, blue);
 
-      const cell = [brightness];
+      const cell = [brightness, `rgb(${red},${green},${blue})`];
 
       row.push(cell);
     }
