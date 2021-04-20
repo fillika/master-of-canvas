@@ -59,13 +59,13 @@ class Particle {
   }
 }
 
-function initPumpkins() {
+function initPumpkins(count: number = 30) {
   const canvas = <HTMLCanvasElement>document.getElementById('pumpkins');
 
   if (!canvas) return;
 
-  const particlesCount = 75;
-  const particlesArray = [];
+  const particlesCount = count;
+  const particlesArray: Particle[] = [];
 
   const ctx = <CanvasRenderingContext2D>canvas.getContext('2d');
   setCanvasStyles(canvas, ctx);
@@ -93,3 +93,7 @@ function animate(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, parti
 }
 
 initPumpkins();
+
+window.onresize = function () {
+  initPumpkins();
+};
