@@ -38,14 +38,23 @@ class Particle {
       const distance = Math.sqrt(dx * dx + dy * dy);
       const forceDirectionX = dx / distance;
       const forceDirectionY = dy / distance;
+      const maxDistance = this.mouse.radius;
+      const force = (maxDistance - distance) / maxDistance; // Сила, с которой частицы двигаются
+      const directionX = forceDirectionX * force * this.density;
+      const directionY = forceDirectionY * force * this.density;
 
-      if (distance < 250 && distance > 150) {
-        // this.size = 21;
-        this.x += forceDirectionX * 5;
-        this.y += forceDirectionY * 5;
-      } else if (distance < 150) {
-        this.x -= forceDirectionX;
-        this.y -= forceDirectionY;
+      if (distance < this.mouse.radius) {
+        this.x -= directionX;
+        this.y -= directionY;
+      } else {
+        if (this.x !== this.baseX) {
+          let dx = this.x - this.baseX;
+          this.x -= dx / 10;
+        }
+        if (this.y !== this.baseY) {
+          let dy = this.y - this.baseY;
+          this.y -= dy / 10
+        }
       }
     }
   }

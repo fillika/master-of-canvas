@@ -33,7 +33,7 @@ function canvasInit() {
   const mouse: mouseObj = {
     x: null,
     y: null,
-    radius: 75,
+    radius: 250,
   };
 
   for (let k = 0; k < 400; k++) {
