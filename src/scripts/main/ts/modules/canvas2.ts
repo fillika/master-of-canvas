@@ -24,7 +24,7 @@ function canvasInit() {
   ctx.beginPath();
   ctx.stroke();
   // get data
-  const data = ctx.getImageData(canvas.width / 3, canvas.height / 3, canvas.width / 3, canvas.height / 3);
+  const textCoords = ctx.getImageData(canvas.width / 3, canvas.height / 3, canvas.width / 3, canvas.height / 3);
 
   const particleArray = [];
 
@@ -33,13 +33,17 @@ function canvasInit() {
   const mouse: mouseObj = {
     x: null,
     y: null,
-    radius: 250,
+    radius: 75,
   };
 
-  for (let k = 0; k < 400; k++) {
-    const x = Math.round(Math.random() * canvas.width);
-    const y = Math.round(Math.random() * canvas.height);
-    particleArray.push(new Particle(x, y, canvas, ctx, mouse));
+  for (let y = 0, y2 = textCoords.height; y < y2; y++) {
+    for (let x = 0, x2 = textCoords.width; x < x2; x++) {
+      if (textCoords.data[y * 4 * textCoords.width + x * 4 + 3] > 225) {
+        let positionX = x;
+        let positionY = y;
+        particleArray.push(new Particle(positionX * 2, positionY * 2, canvas, ctx, mouse));
+      }
+    }
   }
 
   animate(canvas, ctx, particleArray);

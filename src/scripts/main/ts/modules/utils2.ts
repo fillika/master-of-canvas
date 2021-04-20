@@ -61,7 +61,7 @@ class Particle {
 }
 
 function drawText(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, msg: string) {
-  ctx.font = 'italic 135px sans-serif';
+  ctx.font = 'italic 24px Arial';
   ctx.fillStyle = '#fff';
   const text = ctx.measureText(msg);
   ctx.fillText(msg, canvas.width / 2 - text.width / 2, canvas.height / 2);
