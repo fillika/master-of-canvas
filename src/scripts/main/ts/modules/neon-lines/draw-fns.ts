@@ -14,7 +14,7 @@ function drawLine(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   const x = sin60 * lineLength;
   const y = Math.sqrt(lineLength * lineLength - x * x);
 
-  calculateCoords(ctx);
+  calculateCoords(canvas, ctx);
 
 
   let destinationX = startX - x;
