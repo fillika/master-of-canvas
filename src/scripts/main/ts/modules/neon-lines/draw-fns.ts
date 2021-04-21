@@ -1,10 +1,14 @@
-import { calculateCoords } from "./utils";
+import { calculateCoords } from './utils';
 
 function drawLine(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
-  calculateCoords(canvas, ctx, 'red');
-  // calculateCoords(canvas, ctx, 'green');
-  // calculateCoords(canvas, ctx, 'green');
-  // calculateCoords(canvas, ctx, 'blue');
+  // const lines = Math.round(Math.random() * 50 + 5);
+
+  // for (let l = 0; l < lines; l++) {
+  //   const color = Math.round(Math.random() * 255 * Math.random() * 255 * Math.random() * 255);
+  //   calculateCoords(canvas, ctx, `#${color.toString(16)}`);
+  // }
+
+  calculateCoords(canvas, ctx, `yellow`);
 }
 
 function drawHexagon(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
