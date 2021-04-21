@@ -1,4 +1,4 @@
-function calculateCoords(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+function calculateCoords(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, color?: string = '#ccc') {
   const lineLength = 30;
   let angle = 0;
   // const yStep = lineLength * Math.sqrt(3) / 2; // Шаг координаты по оси Y
@@ -20,7 +20,7 @@ function calculateCoords(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2
     angle += Math.random() < 0.5 ? 60 : -60;
   }
 
-  ctx.strokeStyle = '#fff';
+  ctx.strokeStyle = color;
   ctx.stroke();
   ctx.closePath();
 }
