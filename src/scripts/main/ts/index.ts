@@ -2,5 +2,5 @@
 // import './modules/canvas1';
 // import './modules/canvas2';
 // import './modules/pumpkins'
-// import './modules/neon-lines';
-import './modules/neon-lines/ref';
+import './modules/neon-lines';
+// import './modules/neon-lines/ref';

@@ -18,8 +18,8 @@ function init() {
 
   // draw simple line
 
-  // drawLine(canvas, ctx);
-  drawHexagon(canvas, ctx);
+  drawLine(canvas, ctx);
+  // drawHexagon(canvas, ctx);
 }
 
 init();
