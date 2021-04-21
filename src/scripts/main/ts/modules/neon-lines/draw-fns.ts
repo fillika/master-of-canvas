@@ -1,43 +1,10 @@
 import { calculateCoords } from "./utils";
 
 function drawLine(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
-  let startX = canvas.width / 2;
-  let startY = canvas.height / 2;
-
-  let angle = 0;
-  const lineLength = 30;
-  const coords: [number, number][] = [];
-
-  // Найти угол
-  const sin60 = Math.sin((angle * Math.PI) / 180); // Синус угла в 60 deg
-
-  const x = sin60 * lineLength;
-  const y = Math.sqrt(lineLength * lineLength - x * x);
-
-  calculateCoords(canvas, ctx);
   calculateCoords(canvas, ctx, 'red');
-  calculateCoords(canvas, ctx, 'green');
-  calculateCoords(canvas, ctx, 'blue');
-  calculateCoords(canvas, ctx, 'pink');
-
-
-  let destinationX = startX - x;
-  let destinationY = startY - y;
-
-  for (let p = 0; p < 6; p++) {
-    coords.push();
-  }
-
-  // // ctx.beginPath();
-  // ctx.moveTo(startX, startY);
-
-  // for (let j = 0; j < coords.length; j++) {
-  //   ctx.lineTo(coords[j][0], coords[j][1]);
-  // }
-
-  // ctx.strokeStyle = '#fff';
-  // ctx.stroke();
-  // // ctx.closePath();
+  // calculateCoords(canvas, ctx, 'green');
+  // calculateCoords(canvas, ctx, 'green');
+  // calculateCoords(canvas, ctx, 'blue');
 }
 
 function drawHexagon(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
