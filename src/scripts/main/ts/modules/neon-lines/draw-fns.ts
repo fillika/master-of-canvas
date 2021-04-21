@@ -1,10 +1,10 @@
+import { Hexagon } from './Hexagon';
 import { calculateCoords } from './utils';
 
 function drawLine(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
-  const lines = ['red', 'green', 'blue', 'yellow', 'white']
+  // const lines = ['red', 'green', 'blue', 'yellow', 'white']
 
-  lines.forEach(lineColor => calculateCoords(canvas, ctx, lineColor))
-  // calculateCoords(canvas, ctx, `yellow`);
+
 }
 
 function drawHexagon(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {

@@ -42,8 +42,6 @@ function calculateCoords(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2
     let x = resultX + xStep;
     let y = resultY + yStep;
 
-    console.log(angle);
-    
     while (y >= canvas.height || y <= 0 || x >= canvas.width || x <= 0) {
       if (randomForAngle) {
         angle += -120;

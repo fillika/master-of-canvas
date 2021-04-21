@@ -1,4 +1,5 @@
 import { drawHexagon, drawLine } from './draw-fns';
+import { Hexagon } from './Hexagon';
 
 function init() {
   const canvas = <HTMLCanvasElement>document.getElementById('neon-lines');
@@ -8,6 +9,7 @@ function init() {
   const ctx = <CanvasRenderingContext2D>canvas.getContext('2d');
   const parent = canvas.parentElement;
 
+  const linesArray = ['red', 'green', 'blue', 'yellow'];
   //set styles
   if (parent) {
     const parentWidth = parent.getBoundingClientRect().width;
@@ -16,10 +18,16 @@ function init() {
     canvas.height = parentHeight;
   }
 
-  // draw simple line
+  for (let l = 0; l < linesArray.length; l++) {
+    const h = new Hexagon(canvas, ctx, linesArray[l]);
 
-  drawLine(canvas, ctx);
-  // drawHexagon(canvas, ctx);
+    animate();
+
+    function animate() {
+      h.update();
+      requestAnimationFrame(animate);
+    }
+  }
 }
 
 init();
