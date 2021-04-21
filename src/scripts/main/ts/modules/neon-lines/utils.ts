@@ -1,6 +1,7 @@
 function calculateCoords(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, color: string = '#bbb') {
-  const lineLength = 15;
-  let angle = Math.random() < 0.5 ? -60 : 60;
+  const lineLength = 30;
+  let randomForAngle = Math.random() > 0.5;
+  let angle = randomForAngle ? 60 : -60;
   let startX = canvas.width / 2;
   let startY = canvas.height / 2;
   /**
@@ -38,21 +39,36 @@ function calculateCoords(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2
 
     let yStep = lineLength * Math.cos((angle * Math.PI) / 180); // Шаг координаты по оси Y
     let xStep = lineLength * Math.sin((angle * Math.PI) / 180); // Шаг координаты по оси Y
-    let x = (resultX += xStep);
-    let y = (resultY += yStep);
+    let x = resultX + xStep;
+    let y = resultY + yStep;
 
-    // TODO Сделать ограничение, чтобы линия не уходила за край
+    console.log(angle);
+    
+    while (y >= canvas.height || y <= 0 || x >= canvas.width || x <= 0) {
+      if (randomForAngle) {
+        angle += -120;
+      } else {
+        angle += 120;
+      }
+     
+      yStep = lineLength * Math.cos((angle * Math.PI) / 180);
+      xStep = lineLength * Math.sin((angle * Math.PI) / 180);
+      y = resultY + yStep;
+      x = resultX + xStep;
+    }
+
     ctx.moveTo(prevX, prevY);
     ctx.lineTo(x, y);
-    angle += Math.random() < 0.5 ? 60 : -60;
 
     ctx.strokeStyle = color;
     ctx.stroke();
     ctx.closePath();
 
-    prevX = x;
-    prevY = y;
+    prevX = resultX = x;
+    prevY = resultY = y;
 
+    randomForAngle = Math.random() > 0.5;
+    angle += randomForAngle ? 60 : -60;
     requestAnimationFrame(drawOneTick);
   }
 }
