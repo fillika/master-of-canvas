@@ -3,6 +3,7 @@ class Hexagon {
   ctx: CanvasRenderingContext2D;
   color: string;
   lineLength: number;
+  stepLength: number;
   randomForAngle: boolean;
   angle: number;
   startX: number;
@@ -16,12 +17,15 @@ class Hexagon {
   yStep: number;
   x: number;
   y: number;
+  targetX: number;
+  targetY: number;
 
   constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, color: string = 'yellow') {
     this.canvas = canvas;
     this.ctx = ctx;
     this.color = color;
     this.lineLength = 30;
+    this.stepLength = 1;
     this.randomForAngle = Math.random() > 0.5;
     this.angle = this.randomForAngle ? 60 : -60;
     this.startX = this.canvas.width / 2;
@@ -33,8 +37,10 @@ class Hexagon {
     this.abc = 2;
     this.xStep = this.lineLength * Math.sin((this.angle * Math.PI) / 180);
     this.yStep = this.lineLength * Math.cos((this.angle * Math.PI) / 180);
-    this.x = this.resultX + this.xStep;
-    this.y = this.resultY + this.xStep;
+    this.x = this.startX;
+    this.y = this.startY;
+    this.targetX = this.resultX + this.xStep;
+    this.targetY = this.resultY + this.xStep;
   }
 
   draw() {
