@@ -1,4 +1,3 @@
-import { drawHexagon, drawLine } from './draw-fns';
 import { Hexagon } from './Hexagon';
 
 function init() {
@@ -17,6 +16,8 @@ function init() {
     canvas.width = parentWidth;
     canvas.height = parentHeight;
   }
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   for (let l = 0; l < linesArray.length; l++) {
     const h = new Hexagon(canvas, ctx, linesArray[l]);
